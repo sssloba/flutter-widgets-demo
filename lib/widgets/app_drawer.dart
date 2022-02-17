@@ -3,6 +3,7 @@ import 'package:flutter_widgets_demo/screens/animated_cross_fade_demo.dart';
 import 'package:flutter_widgets_demo/screens/draggables.dart';
 import 'package:flutter_widgets_demo/screens/home_page.dart';
 import 'package:flutter_widgets_demo/screens/slivers.dart';
+import 'package:flutter_widgets_demo/screens/steppers.dart';
 import 'package:flutter_widgets_demo/widgets/drawer_tile.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -17,6 +18,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Animated Cross Fade', AnimatedCrossFadeDemo()),
           DrawerTile('Slivers', Slivers()),
           DrawerTile('Draggable', Draggables()),
+          DrawerTile('Steppers', Steppers()),
         ],
       ),
     );
