@@ -18,17 +18,25 @@ class Slivers extends StatelessWidget {
             snap: true,
             backgroundColor: Colors.purple,
             foregroundColor: Colors.green,
-            expandedHeight: 200,
+            expandedHeight: 300,
           ),
           SliverList(
             delegate: SliverChildListDelegate(
               [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 36.0, horizontal: 16.0),
+                  child: Text(
+                    'Sliver List starts here!',
+                    textScaleFactor: 1.4,
+                  ),
+                ),
                 Container(
-                  height: 350,
+                  height: 150,
                   color: Colors.blue,
                 ),
                 Container(
-                  height: 600,
+                  height: 200,
                   color: Colors.yellow,
                 ),
                 Container(
@@ -36,15 +44,15 @@ class Slivers extends StatelessWidget {
                   color: Colors.greenAccent,
                 ),
                 Container(
-                  height: 350,
+                  height: 50,
                   color: Colors.yellow[900],
                 ),
                 Container(
-                  height: 350,
+                  height: 130,
                   color: Colors.blue,
                 ),
                 Container(
-                  height: 350,
+                  height: 400,
                   color: Colors.deepOrange,
                 ),
                 Container(
@@ -52,15 +60,15 @@ class Slivers extends StatelessWidget {
                   color: Colors.deepPurple,
                 ),
                 Container(
-                  height: 350,
+                  height: 40,
                   color: Colors.cyan,
                 ),
                 Container(
-                  height: 350,
+                  height: 70,
                   color: Colors.blue,
                 ),
                 Container(
-                  height: 350,
+                  height: 150,
                   color: Colors.yellow,
                 ),
                 Container(
