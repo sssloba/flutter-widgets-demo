@@ -16,7 +16,7 @@ class _ReorderablesState extends State<Reorderables> {
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 12; i++) {
       Color color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
       _reordableList.add(
         Card(
@@ -24,6 +24,15 @@ class _ReorderablesState extends State<Reorderables> {
           color: color,
           child: ListTile(
             title: Text('Item ${i + 1}'),
+            trailing: IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () {
+                setState(() {
+                  _reordableList
+                      .removeWhere((element) => element.key == ValueKey(i));
+                });
+              },
+            ),
           ),
         ),
       );
