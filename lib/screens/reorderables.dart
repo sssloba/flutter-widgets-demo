@@ -46,26 +46,31 @@ class _ReorderablesState extends State<Reorderables> {
       appBar: AppBar(
         title: const Text('Reordable List'),
       ),
-      body: ReorderableListView(
-          header: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: Text(
-              'Press and hold item to reorder tham',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+      body: ReorderableListView.builder(
+        itemCount: _reordableList.length,
+        header: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: Text(
+            'Press and hold item to reorder them',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          children: _reordableList,
-          onReorder: (int oldIndex, int newIndex) {
-            setState(() {
-              final int index = newIndex > oldIndex ? newIndex - 1 : newIndex;
-              final Widget item = _reordableList.removeAt(oldIndex);
-              _reordableList.insert(index, item);
-            });
-          }),
+        ),
+        // children: _reordableList,
+        itemBuilder: (BuildContext context, int index) {
+          return _reordableList.elementAt(index);
+        },
+        onReorder: (int oldIndex, int newIndex) {
+          setState(() {
+            final int index = newIndex > oldIndex ? newIndex - 1 : newIndex;
+            final Widget item = _reordableList.removeAt(oldIndex);
+            _reordableList.insert(index, item);
+          });
+        },
+      ),
     );
   }
 }
