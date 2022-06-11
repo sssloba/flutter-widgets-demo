@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/screens/animated_cross_fade_demo.dart';
+import 'package:flutter_widgets_demo/screens/callback_text_first.dart';
 import 'package:flutter_widgets_demo/screens/draggables.dart';
 import 'package:flutter_widgets_demo/screens/home_page.dart';
 import 'package:flutter_widgets_demo/screens/reorderables.dart';
@@ -22,6 +23,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Steppers', Steppers()),
           DrawerTile('Reordable List', Reorderables()),
           DrawerTile('Colored title', ColoredBox(color: Colors.green)),
+          DrawerTile('Callback Text', CallbackTextFirst()),
         ],
       ),
     );
