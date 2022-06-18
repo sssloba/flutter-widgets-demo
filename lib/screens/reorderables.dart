@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
+import 'package:flutter_widgets_demo/widgets/edit_text_dialog.dart';
 
 class Reorderables extends StatefulWidget {
   const Reorderables({Key? key}) : super(key: key);
@@ -29,7 +30,6 @@ class _ReorderablesState extends State<Reorderables> {
             reordableList.removeWhere((element) => element.key == key);
           });
         },
-        onEdit: () {},
       ));
     }
   }
@@ -74,12 +74,10 @@ class _ReorderableItem extends StatefulWidget {
     Key? key,
     required this.title,
     required this.onDelete,
-    required this.onEdit,
   }) : super(key: key);
 
   final String title;
   final Function() onDelete;
-  final Function() onEdit;
 
   @override
   State<_ReorderableItem> createState() => _ReorderableItemState();
@@ -108,11 +106,16 @@ class _ReorderableItemState extends State<_ReorderableItem> {
               Expanded(
                   child: IconButton(
                       icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        setState(() {
-                          _title = 'title edited';
-                        });
-                        widget.onEdit;
+                      onPressed: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) => EditTextDialog(
+                                  initialText: _title,
+                                )).then(
+                          (value) => setState(() {
+                            _title = value;
+                          }),
+                        );
                       })),
               Expanded(
                   child: IconButton(
