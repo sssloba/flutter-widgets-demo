@@ -34,7 +34,6 @@ class _CallbackTextFirstState extends State<CallbackTextFirst> {
                   builder: (context) => CallbackTextSecond(
                         initialText: _callbackText,
                         onChange: (value) {
-                          print(value);
                           _callbackText = value;
                           setState(() {});
                         },

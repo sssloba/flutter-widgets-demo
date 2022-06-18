@@ -11,31 +11,26 @@ class Reorderables extends StatefulWidget {
 }
 
 class _ReorderablesState extends State<Reorderables> {
-  final List<Widget> _reordableList = <Widget>[];
+  final List<_ReorderableItem> reordableList = <_ReorderableItem>[];
+  final List<String> titles = <String>[];
 
   @override
   void initState() {
     super.initState();
     for (int i = 0; i < 12; i++) {
-      Color color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
-      _reordableList.add(
-        Card(
-          key: ValueKey(i),
-          color: color,
-          child: ListTile(
-            title: Text('Item ${i + 1}'),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                setState(() {
-                  _reordableList
-                      .removeWhere((element) => element.key == ValueKey(i));
-                });
-              },
-            ),
-          ),
-        ),
-      );
+      final ValueKey key = ValueKey(i);
+      String title = 'Item ${i + 1}';
+      titles.add('Item ${i + 1}');
+      reordableList.add(_ReorderableItem(
+        key: key,
+        title: title,
+        onDelete: () {
+          setState(() {
+            reordableList.removeWhere((element) => element.key == key);
+          });
+        },
+        onEdit: () {},
+      ));
     }
   }
 
@@ -47,7 +42,7 @@ class _ReorderablesState extends State<Reorderables> {
         title: const Text('Reordable List'),
       ),
       body: ReorderableListView.builder(
-        itemCount: _reordableList.length,
+        itemCount: reordableList.length,
         header: const Padding(
           padding: EdgeInsets.symmetric(vertical: 16.0),
           child: Text(
@@ -59,17 +54,73 @@ class _ReorderablesState extends State<Reorderables> {
             ),
           ),
         ),
-        // children: _reordableList,
         itemBuilder: (BuildContext context, int index) {
-          return _reordableList.elementAt(index);
+          return reordableList.elementAt(index);
         },
         onReorder: (int oldIndex, int newIndex) {
           setState(() {
             final int index = newIndex > oldIndex ? newIndex - 1 : newIndex;
-            final Widget item = _reordableList.removeAt(oldIndex);
-            _reordableList.insert(index, item);
+            final _ReorderableItem item = reordableList.removeAt(oldIndex);
+            reordableList.insert(index, item);
           });
         },
+      ),
+    );
+  }
+}
+
+class _ReorderableItem extends StatefulWidget {
+  const _ReorderableItem({
+    Key? key,
+    required this.title,
+    required this.onDelete,
+    required this.onEdit,
+  }) : super(key: key);
+
+  final String title;
+  final Function() onDelete;
+  final Function() onEdit;
+
+  @override
+  State<_ReorderableItem> createState() => _ReorderableItemState();
+}
+
+class _ReorderableItemState extends State<_ReorderableItem> {
+  late String _title;
+  final Color randomColor =
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
+  @override
+  void initState() {
+    super.initState();
+    _title = widget.title;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: randomColor,
+      child: ListTile(
+        title: Text(_title),
+        trailing: SizedBox(
+          width: 80.0,
+          child: Row(
+            children: [
+              Expanded(
+                  child: IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        setState(() {
+                          _title = 'title edited';
+                        });
+                        widget.onEdit;
+                      })),
+              Expanded(
+                  child: IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: widget.onDelete)),
+            ],
+          ),
+        ),
       ),
     );
   }
