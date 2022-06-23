@@ -14,6 +14,7 @@ class Reorderables extends StatefulWidget {
 
 class _ReorderablesState extends State<Reorderables> {
   final List<_ReorderableItem> reordableList = <_ReorderableItem>[];
+  final List<int> itemNumber = <int>[0];
 
   @override
   void initState() {
@@ -21,7 +22,8 @@ class _ReorderablesState extends State<Reorderables> {
     for (int i = 0; i < 12; i++) {
       final uuid = const Uuid().v1();
       final ValueKey key = ValueKey(uuid);
-      String title = 'Item ${i + 1}';
+      itemNumber.add(i + 1);
+      String title = 'Item ${itemNumber.last}';
       reordableList.add(_ReorderableItem(
         key: key,
         title: title,
@@ -70,7 +72,8 @@ class _ReorderablesState extends State<Reorderables> {
           setState(() {
             final uuid = const Uuid().v1();
             final ValueKey key = ValueKey(uuid);
-            String title = 'Item ${reordableList.length + 1}';
+            itemNumber.add(itemNumber.last + 1);
+            String title = 'Item ${itemNumber.last}';
             reordableList.add(_ReorderableItem(
               key: key,
               title: title,
