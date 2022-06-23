@@ -21,7 +21,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Slivers', Slivers()),
           DrawerTile('Draggable', Draggables()),
           DrawerTile('Steppers', Steppers()),
-          DrawerTile('Reordable List', Reorderables()),
+          DrawerTile('Reorderable List', Reorderables()),
           DrawerTile('Colored title', ColoredBox(color: Colors.green)),
           DrawerTile('Callback Text', CallbackTextFirst()),
         ],

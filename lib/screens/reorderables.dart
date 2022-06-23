@@ -41,7 +41,7 @@ class _ReorderablesState extends State<Reorderables> {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
-        title: const Text('Reordable List'),
+        title: const Text('Reorderable List'),
       ),
       body: ReorderableListView.builder(
         itemCount: reordableList.length,
