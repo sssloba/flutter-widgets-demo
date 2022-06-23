@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
 import 'package:flutter_widgets_demo/widgets/edit_text_dialog.dart';
+import 'package:uuid/uuid.dart';
 
 class Reorderables extends StatefulWidget {
   const Reorderables({Key? key}) : super(key: key);
@@ -13,15 +14,14 @@ class Reorderables extends StatefulWidget {
 
 class _ReorderablesState extends State<Reorderables> {
   final List<_ReorderableItem> reordableList = <_ReorderableItem>[];
-  final List<String> titles = <String>[];
 
   @override
   void initState() {
     super.initState();
     for (int i = 0; i < 12; i++) {
-      final ValueKey key = ValueKey(i);
+      final uuid = const Uuid().v1();
+      final ValueKey key = ValueKey(uuid);
       String title = 'Item ${i + 1}';
-      titles.add('Item ${i + 1}');
       reordableList.add(_ReorderableItem(
         key: key,
         title: title,
@@ -65,6 +65,36 @@ class _ReorderablesState extends State<Reorderables> {
           });
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            final uuid = const Uuid().v1();
+            final ValueKey key = ValueKey(uuid);
+            String title = 'Item ${reordableList.length + 1}';
+            reordableList.add(_ReorderableItem(
+              key: key,
+              title: title,
+              onDelete: () {
+                setState(() {
+                  reordableList.removeWhere((element) => element.key == key);
+                });
+              },
+            ));
+          });
+        },
+        label: Row(
+          children: const [
+            Icon(
+              Icons.add,
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Add Item'),
+            )
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
