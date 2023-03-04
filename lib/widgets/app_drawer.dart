@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/screens/animated_cross_fade_demo.dart';
 import 'package:flutter_widgets_demo/screens/callback_text_first.dart';
+import 'package:flutter_widgets_demo/screens/physical_model_demo.dart';
 import 'package:flutter_widgets_demo/screens/draggables.dart';
 import 'package:flutter_widgets_demo/screens/home_page.dart';
 import 'package:flutter_widgets_demo/screens/reorderables.dart';
@@ -26,6 +27,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Colored title', ColoredBox(color: Colors.green)),
           DrawerTile('Callback Text', CallbackTextFirst()),
           DrawerTile('Stateful Builder Demo', StatefulBuilderDemo()),
+          DrawerTile('Physical Model', PhysicalModelDemo()),
         ],
       ),
     );
