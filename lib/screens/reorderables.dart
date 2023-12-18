@@ -85,8 +85,8 @@ class _ReorderablesState extends State<Reorderables> {
             ));
           });
         },
-        label: Row(
-          children: const [
+        label: const Row(
+          children: [
             Icon(
               Icons.add,
             ),

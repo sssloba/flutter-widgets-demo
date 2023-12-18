@@ -28,7 +28,7 @@ class Slivers extends StatelessWidget {
                       EdgeInsets.symmetric(vertical: 36.0, horizontal: 16.0),
                   child: Text(
                     'Sliver List starts here!',
-                    textScaleFactor: 1.4,
+                    textScaler: TextScaler.linear(1.4),
                   ),
                 ),
                 Container(
