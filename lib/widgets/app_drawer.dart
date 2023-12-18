@@ -9,6 +9,7 @@ import 'package:flutter_widgets_demo/screens/reorderables.dart';
 import 'package:flutter_widgets_demo/screens/slivers.dart';
 import 'package:flutter_widgets_demo/screens/stateful_builder_demo.dart';
 import 'package:flutter_widgets_demo/screens/steppers.dart';
+import 'package:flutter_widgets_demo/screens/value_notifier_draggable.dart';
 import 'package:flutter_widgets_demo/widgets/drawer_tile.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -30,6 +31,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Stateful Builder Demo', StatefulBuilderDemo()),
           DrawerTile('Physical Model', PhysicalModelDemo()),
           DrawerTile('Draggable Scrollable Demo', DraggableScrollableDemo()),
+          DrawerTile('Value Notifier Draggable', ValueNotifierDraggable()),
         ],
       ),
     );
