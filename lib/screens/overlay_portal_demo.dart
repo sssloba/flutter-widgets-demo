@@ -70,11 +70,7 @@ class OverlayPortalDemo extends StatelessWidget {
                           .primaries[Random().nextInt(Colors.primaries.length)],
                       child: SizedBox(
                         height: 100 + Random().nextDouble() * 200,
-                        // Random(MediaQuery.sizeOf(context).height.toInt())
-                        //     .nextDouble(),
                         width: 100 + Random().nextDouble() * 100,
-                        // Random(MediaQuery.sizeOf(context).width.toInt())
-                        //     .nextDouble(),
                         child: const Center(
                           child: Text(
                             'I am an Rundom Overlay!!!',
