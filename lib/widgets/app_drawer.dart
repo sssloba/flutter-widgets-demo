@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/screens/animated_cross_fade_demo.dart';
 import 'package:flutter_widgets_demo/screens/callback_text_first.dart';
 import 'package:flutter_widgets_demo/screens/draggable_scrollabe_demo.dart';
+import 'package:flutter_widgets_demo/screens/drop_down_demo.dart';
 import 'package:flutter_widgets_demo/screens/overlay_portal_demo.dart';
 import 'package:flutter_widgets_demo/screens/physical_model_demo.dart';
 import 'package:flutter_widgets_demo/screens/draggables.dart';
@@ -34,6 +35,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Draggable Scrollable Demo', DraggableScrollableDemo()),
           DrawerTile('Value Notifier Draggable', ValueNotifierDraggable()),
           DrawerTile('Overlay Portal Demo', OverlayPortalDemo()),
+          DrawerTile('Drop Down Demo', DropDownDemo()),
         ],
       ),
     );
