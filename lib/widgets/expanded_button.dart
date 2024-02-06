@@ -47,9 +47,17 @@ class _ExpandedButtonState extends State<ExpandedButton> {
       focusNode: _focusNode,
       child: AnimatedContainer(
         height: _calculateHeight(),
+        width: MediaQuery.sizeOf(context).width,
         duration: Duration(milliseconds: widget.animationDuration),
         alignment: Alignment.topCenter,
         child: ElevatedButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32),
+              ),
+            ),
+          ),
           onPressed: () => _focusNode.hasFocus
               ? _focusNode.unfocus()
               : _focusNode.requestFocus(),
@@ -57,42 +65,55 @@ class _ExpandedButtonState extends State<ExpandedButton> {
             width: MediaQuery.sizeOf(context).width,
             child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Text(
-                  widget.title,
-                  style: widget.titleStyle,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 18),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      widget.content != null
-                          ? Container(
-                              constraints: const BoxConstraints(minHeight: 55),
-                              margin:
-                                  const EdgeInsets.only(bottom: 10, top: 18),
-                              child: Text(
-                                widget.content!,
-                                textAlign: TextAlign.center,
-                                style: widget.contentStyle,
-                              ),
-                            )
-                          : const SizedBox(height: 18),
-                      ...widget.children.map(
-                        (item) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (widget.children.first != item)
-                              const SizedBox(height: 10),
-                            item,
-                          ],
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        height: 55,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            widget.title,
+                            textAlign: TextAlign.end,
+                            style: widget.titleStyle,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 18),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          widget.content != null
+                              ? Container(
+                                  constraints:
+                                      const BoxConstraints(minHeight: 55),
+                                  margin: const EdgeInsets.only(
+                                      bottom: 10, top: 18),
+                                  child: Text(
+                                    widget.content!,
+                                    textAlign: TextAlign.center,
+                                    style: widget.contentStyle,
+                                  ),
+                                )
+                              : const SizedBox(height: 18),
+                          ...widget.children.map(
+                            (item) => Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (widget.children.first != item)
+                                  const SizedBox(height: 10),
+                                item,
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
             ),
           ),
         ),
