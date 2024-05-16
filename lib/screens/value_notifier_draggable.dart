@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
 
 class ValueNotifierDraggable extends StatefulWidget {
   const ValueNotifierDraggable({Key? key}) : super(key: key);
@@ -27,9 +28,13 @@ class _ValueNotifierDraggableState extends State<ValueNotifierDraggable> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: const AppDrawer(),
+        appBar: AppBar(
+          title: const Text('Value Notifier Draggable'),
+        ),
         body: Stack(children: <Widget>[
-      _buildDraggable(),
-    ]));
+          _buildDraggable(),
+        ]));
   }
 
   _buildDraggable() {
