@@ -55,8 +55,14 @@ class _ValueNotifierDraggableState extends State<ValueNotifierDraggable> {
                   height: 170.0,
                   child: Container(
                     color: Colors.black87,
+                    child: const Center(
+                        child: Text(
+                      'Drag me!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 24, color: Colors.white),
+                    )),
                   ),
-                  decoration: const BoxDecoration(color: Colors.black54),
+                  decoration: const BoxDecoration(color: Colors.red),
                 ));
 
             return ValueListenableBuilder<List<double>>(
