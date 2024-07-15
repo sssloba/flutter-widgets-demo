@@ -41,7 +41,7 @@ class _DraggablesState extends State<Draggables> {
               ),
             ),
             DragTarget(
-                onAccept: (data) => setState(() {
+                onAcceptWithDetails: (data) => setState(() {
                       _targetSize = 20.0;
                       _targetColor = Colors.green;
                     }),
