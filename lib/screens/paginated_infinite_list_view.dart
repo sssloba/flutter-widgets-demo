@@ -9,7 +9,7 @@ class PaginatedListView extends StatefulWidget {
 }
 
 class _PaginatedListViewState extends State<PaginatedListView> {
-  List<String> items = List.generate(100, (i) => 'Item ${i + 1}');
+  List<String> items = List.generate(20, (i) => 'Item ${i + 1}');
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,28 @@ class _PaginatedListViewState extends State<PaginatedListView> {
       ),
       backgroundColor: const Color.fromARGB(255, 78, 77, 75),
       body: ListView.builder(
-        itemCount: items.length,
+        itemCount: items.length + 1,
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ListTile(
-              title: Center(child: Text(items[index])),
-              tileColor: const Color.fromARGB(255, 211, 210, 158),
-              shape: const StadiumBorder(),
-              onTap: () {},
-            ),
-          );
+          return index < items.length
+              ? Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    title: Center(child: Text(items[index])),
+                    tileColor: const Color.fromARGB(255, 211, 210, 158),
+                    shape: const StadiumBorder(),
+                    onTap: () {},
+                  ),
+                )
+              : const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    strokeWidth: 6,
+                    color: Color.fromARGB(255, 187, 171, 151),
+                    backgroundColor: Color.fromARGB(255, 128, 124, 141),
+                  )),
+                );
         },
       ),
     );
