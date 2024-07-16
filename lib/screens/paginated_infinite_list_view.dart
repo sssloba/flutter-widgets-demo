@@ -18,8 +18,21 @@ class _PaginatedListViewState extends State<PaginatedListView> {
       appBar: AppBar(
         title: const Text('Paginated List View'),
       ),
-      body: ListView(
-        children: items.map((item) => Text(item)).toList(),
+      backgroundColor: const Color.fromARGB(255, 78, 77, 75),
+      body: ListView.builder(
+        itemCount: items.length,
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListTile(
+              title: Center(child: Text(items[index])),
+              tileColor: const Color.fromARGB(255, 211, 210, 158),
+              shape: const StadiumBorder(),
+              onTap: () {},
+            ),
+          );
+        },
       ),
     );
   }
