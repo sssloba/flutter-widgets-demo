@@ -9,7 +9,36 @@ class PaginatedListView extends StatefulWidget {
 }
 
 class _PaginatedListViewState extends State<PaginatedListView> {
-  List<String> items = List.generate(20, (i) => 'Item ${i + 1}');
+  final ScrollController scrollController = ScrollController();
+  static const int paginationItems = 20;
+  int totalItems = paginationItems;
+  List<String> items = List.generate(paginationItems, (i) => 'Item ${i + 1}');
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(_listener);
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_listener);
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void _listener() {
+    if (scrollController.position.maxScrollExtent == scrollController.offset) {
+      Future.delayed(const Duration(milliseconds: 600)).then((_) {
+        setState(() {
+          final List<String> newItems = List.generate(
+              paginationItems, (i) => 'Item ${totalItems + i + 1}');
+          items.addAll(newItems);
+          totalItems += paginationItems;
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +49,7 @@ class _PaginatedListViewState extends State<PaginatedListView> {
       ),
       backgroundColor: const Color.fromARGB(255, 78, 77, 75),
       body: ListView.builder(
+        controller: scrollController,
         itemCount: items.length + 1,
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         itemBuilder: (context, index) {
