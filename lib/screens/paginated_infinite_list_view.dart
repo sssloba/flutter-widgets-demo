@@ -10,8 +10,9 @@ class PaginatedListView extends StatefulWidget {
 
 class _PaginatedListViewState extends State<PaginatedListView> {
   final ScrollController scrollController = ScrollController();
-  static const int paginationItems = 20;
+  static const int paginationItems = 10;
   int totalItems = paginationItems;
+  bool isLoading = false;
   List<String> items = List.generate(paginationItems, (i) => 'Item ${i + 1}');
 
   @override
@@ -28,13 +29,16 @@ class _PaginatedListViewState extends State<PaginatedListView> {
   }
 
   void _listener() {
-    if (scrollController.position.maxScrollExtent == scrollController.offset) {
-      Future.delayed(const Duration(milliseconds: 600)).then((_) {
+    if (scrollController.position.maxScrollExtent == scrollController.offset &&
+        !isLoading) {
+      isLoading = true;
+      Future.delayed(const Duration(milliseconds: 800)).then((_) {
         setState(() {
           final List<String> newItems = List.generate(
               paginationItems, (i) => 'Item ${totalItems + i + 1}');
           items.addAll(newItems);
           totalItems += paginationItems;
+          isLoading = false;
         });
       });
     }
