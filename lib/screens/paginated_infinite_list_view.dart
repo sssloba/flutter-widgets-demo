@@ -13,11 +13,13 @@ class _PaginatedListViewState extends State<PaginatedListView> {
   static const int paginationItems = 10;
   int totalItems = paginationItems;
   bool isLoading = false;
-  List<String> items = List.generate(paginationItems, (i) => 'Item ${i + 1}');
+  bool toggleColor = true;
+  late List<(String, Color)> items;
 
   @override
   void initState() {
     super.initState();
+    items = List.generate(paginationItems, (i) => ('Item ${i + 1}', tileColor));
     scrollController.addListener(_listener);
   }
 
@@ -28,14 +30,19 @@ class _PaginatedListViewState extends State<PaginatedListView> {
     super.dispose();
   }
 
+  Color get tileColor => toggleColor
+      ? const Color.fromARGB(255, 211, 210, 158)
+      : const Color.fromARGB(255, 164, 182, 160);
+
   void _listener() {
     if (scrollController.position.maxScrollExtent == scrollController.offset &&
         !isLoading) {
       isLoading = true;
+      toggleColor = !toggleColor;
       Future.delayed(const Duration(milliseconds: 800)).then((_) {
         setState(() {
-          final List<String> newItems = List.generate(
-              paginationItems, (i) => 'Item ${totalItems + i + 1}');
+          final List<(String, Color)> newItems = List.generate(paginationItems,
+              (i) => ('Item ${totalItems + i + 1}', tileColor));
           items.addAll(newItems);
           totalItems += paginationItems;
           isLoading = false;
@@ -61,8 +68,8 @@ class _PaginatedListViewState extends State<PaginatedListView> {
               ? Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ListTile(
-                    title: Center(child: Text(items[index])),
-                    tileColor: const Color.fromARGB(255, 211, 210, 158),
+                    title: Center(child: Text(items[index].$1)),
+                    tileColor: items[index].$2,
                     shape: const StadiumBorder(),
                     onTap: () {},
                   ),
@@ -70,11 +77,12 @@ class _PaginatedListViewState extends State<PaginatedListView> {
               : const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: Center(
-                      child: CircularProgressIndicator(
-                    strokeWidth: 6,
-                    color: Color.fromARGB(255, 187, 171, 151),
-                    backgroundColor: Color.fromARGB(255, 128, 124, 141),
-                  )),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 6,
+                      color: Color.fromARGB(255, 187, 171, 151),
+                      backgroundColor: Color.fromARGB(255, 128, 124, 141),
+                    ),
+                  ),
                 );
         },
       ),
