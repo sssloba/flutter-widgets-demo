@@ -50,8 +50,14 @@ class _CustomClipPath extends CustomClipper<Path> {
       w, // 4. point
       h, // 4. point
     );
-    path.lineTo(w, h); // 4. point
-    path.lineTo(w, 0); // 5. point
+    path.lineTo(w, 150); // 5. point
+    path.quadraticBezierTo(
+      w - 100, // 6. point
+      h * 0.1, // 6. point
+      w, // 7. point
+      50, // 7. point
+    );
+    path.lineTo(w, 0); // 8. point
     path.close();
 
     return path;
