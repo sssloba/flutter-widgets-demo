@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/screens/animated_cross_fade_demo.dart';
+import 'package:flutter_widgets_demo/screens/bezier_curves_demo.dart';
 import 'package:flutter_widgets_demo/screens/callback_text_first.dart';
 import 'package:flutter_widgets_demo/screens/custom_buttons_demo.dart';
 import 'package:flutter_widgets_demo/screens/draggable_scrollabe_demo.dart';
@@ -42,6 +43,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Custom Buttons Demo', CustomButtonsDemo()),
           DrawerTile('Paginated List View', PaginatedListView()),
           DrawerTile('Overflow Bar Demo', OverflowBarDemo()),
+          DrawerTile('Bezier Curves Demo', BezierCurvesDemo()),
         ],
       ),
     );
