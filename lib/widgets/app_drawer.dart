@@ -27,6 +27,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Paginated List View', PaginatedListView()),
           DrawerTile('Overflow Bar Demo', OverflowBarDemo()),
           DrawerTile('Bezier Curves Demo', BezierCurvesDemo()),
+          DrawerTile('Carousel View Demo', CarouselViewDemo()),
         ],
       ),
     );
