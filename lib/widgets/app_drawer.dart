@@ -28,6 +28,8 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Overflow Bar Demo', OverflowBarDemo()),
           DrawerTile('Bezier Curves Demo', BezierCurvesDemo()),
           DrawerTile('Carousel View Demo', CarouselViewDemo()),
+          DrawerTile(
+              'Resizable Gesture Container', ResizableGestureContainer()),
         ],
       ),
     );

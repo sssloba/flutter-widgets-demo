@@ -12,6 +12,7 @@ export 'package:flutter_widgets_demo/screens/physical_model_demo.dart';
 export 'package:flutter_widgets_demo/screens/draggables.dart';
 export 'package:flutter_widgets_demo/screens/home_page.dart';
 export 'package:flutter_widgets_demo/screens/reorderables.dart';
+export 'package:flutter_widgets_demo/screens/resizable_gesture_container.dart';
 export 'package:flutter_widgets_demo/screens/slivers.dart';
 export 'package:flutter_widgets_demo/screens/stateful_builder_demo.dart';
 export 'package:flutter_widgets_demo/screens/steppers.dart';
