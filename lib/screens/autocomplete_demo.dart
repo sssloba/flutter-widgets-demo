@@ -9,6 +9,7 @@ class AutocompleteDemo extends StatefulWidget {
 }
 
 class _AutocompleteDemoState extends State<AutocompleteDemo> {
+  static const options = <String>['test', 'test2', 'auto test'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,9 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
       ),
       body: Center(
         child: Autocomplete<String>(optionsBuilder: (textEditingValue) {
-          return ['test', 'test2', 'auto test'];
+          return options
+              .where((e) => e.contains(textEditingValue.text))
+              .toList();
         }),
       ),
     );
