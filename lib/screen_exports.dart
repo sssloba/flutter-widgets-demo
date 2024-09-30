@@ -1,4 +1,5 @@
 export 'package:flutter_widgets_demo/screens/animated_cross_fade_demo.dart';
+export 'package:flutter_widgets_demo/screens/autocomplete_demo.dart';
 export 'package:flutter_widgets_demo/screens/bezier_curves_demo.dart';
 export 'package:flutter_widgets_demo/screens/carousel_view_demo.dart';
 export 'package:flutter_widgets_demo/screens/callback_text_first.dart';

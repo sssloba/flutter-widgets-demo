@@ -30,6 +30,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Carousel View Demo', CarouselViewDemo()),
           DrawerTile(
               'Resizable Gesture Container', ResizableGestureContainer()),
+          DrawerTile('Autocomplete Demo', AutocompleteDemo()),
         ],
       ),
     );
