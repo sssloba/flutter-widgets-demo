@@ -9,7 +9,7 @@ class AutocompleteDemo extends StatefulWidget {
 }
 
 class _AutocompleteDemoState extends State<AutocompleteDemo> {
-  static const options = <String>[
+  static const autocompleteOptions = <String>[
     'test',
     'test 2',
     'auto test',
@@ -19,7 +19,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
     'Ally',
     'Lessy 2',
     'Lilly 23',
-    'Ally 25'
+    'Ally 25',
   ];
   String? selectedItem;
   @override
@@ -48,15 +48,16 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                     return const Iterable.empty();
                   }
                   if (textEditingValue.text.trim() == '@all') {
-                    return options;
+                    return autocompleteOptions;
                   }
-                  return options
+                  return autocompleteOptions
                       .where((e) => e
                           .toLowerCase()
                           .contains(textEditingValue.text.toLowerCase()))
                       .toList();
                 },
-                optionsMaxHeight: 400,
+                optionsMaxHeight: 500,
+                // initialValue: const TextEditingValue(text: 'test'),
                 // optionsViewOpenDirection: OptionsViewOpenDirection.values
                 //     .elementAt(Random().nextInt(2)),
                 // displayStringForOption:
@@ -67,8 +68,22 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                 onSelected: (option) {
                   setState(() {
                     selectedItem =
-                        'Item number ${options.indexOf(option) + 1}:\n$option';
+                        'Item number ${autocompleteOptions.indexOf(option) + 1}:\n$option';
                   });
+                },
+                optionsViewBuilder: (context, onSelected, options) {
+                  final items = options.toList();
+                  return ListView.builder(
+                    itemCount: items.length,
+                    padding: const EdgeInsets.only(right: 36.0),
+                    shrinkWrap: true,
+                    clipBehavior: Clip.none,
+                    itemBuilder: (context, index) {
+                      return ElevatedButton(
+                          onPressed: () => onSelected(items[index]),
+                          child: Text(items[index]));
+                    },
+                  );
                 },
               ),
               const SizedBox(height: 30.0),
