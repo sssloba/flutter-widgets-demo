@@ -9,27 +9,16 @@ class AutocompleteDemo extends StatefulWidget {
 }
 
 class _AutocompleteDemoState extends State<AutocompleteDemo> {
-  // static const autocompleteOptions = <String>[
-  //   'test',
-  //   'test 2',
-  //   'auto test',
-  //   'Tessy',
-  //   'Lessy',
-  //   'Lilly',
-  //   'Ally',
-  //   'Lessy 2',
-  //   'Lilly 23',
-  //   'Ally 25',
-  // ];
   String? selectedItem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
-          title: const Text(
-        'Autocomplete Demo',
-      )),
+        title: const Text(
+          'Autocomplete Demo',
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Center(
@@ -75,13 +64,34 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   final items = options.toList();
                   return ListView.builder(
                     itemCount: items.length,
-                    padding: const EdgeInsets.only(right: 36.0),
+                    padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 48.0),
                     shrinkWrap: true,
-                    clipBehavior: Clip.none,
                     itemBuilder: (context, index) {
-                      return ElevatedButton(
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ElevatedButton(
                           onPressed: () => onSelected(items[index]),
-                          child: Text(items[index].name));
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    items[index].name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24.0,
+                                        color: Colors.greenAccent),
+                                  ),
+                                  Text('Item id: ${items[index].id}'),
+                                  Text(
+                                    'Description: ${items[index].description}',
+                                  )
+                                ]),
+                          ),
+                        ),
+                      );
                     },
                   );
                 },
