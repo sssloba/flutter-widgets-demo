@@ -9,18 +9,18 @@ class AutocompleteDemo extends StatefulWidget {
 }
 
 class _AutocompleteDemoState extends State<AutocompleteDemo> {
-  static const autocompleteOptions = <String>[
-    'test',
-    'test 2',
-    'auto test',
-    'Tessy',
-    'Lessy',
-    'Lilly',
-    'Ally',
-    'Lessy 2',
-    'Lilly 23',
-    'Ally 25',
-  ];
+  // static const autocompleteOptions = <String>[
+  //   'test',
+  //   'test 2',
+  //   'auto test',
+  //   'Tessy',
+  //   'Lessy',
+  //   'Lilly',
+  //   'Ally',
+  //   'Lessy 2',
+  //   'Lilly 23',
+  //   'Ally 25',
+  // ];
   String? selectedItem;
   @override
   Widget build(BuildContext context) {
@@ -42,16 +42,16 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   style: TextStyle(color: Colors.red, fontSize: 18.0),
                 ),
               ),
-              Autocomplete<String>(
+              Autocomplete<AutocompleteModel>(
                 optionsBuilder: (textEditingValue) {
                   if (textEditingValue.text.trim().isEmpty) {
                     return const Iterable.empty();
                   }
                   if (textEditingValue.text.trim() == '@all') {
-                    return autocompleteOptions;
+                    return AutocompleteModel.mockList;
                   }
-                  return autocompleteOptions
-                      .where((e) => e
+                  return AutocompleteModel.mockList
+                      .where((e) => e.name
                           .toLowerCase()
                           .contains(textEditingValue.text.toLowerCase()))
                       .toList();
@@ -60,15 +60,15 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                 // initialValue: const TextEditingValue(text: 'test'),
                 // optionsViewOpenDirection: OptionsViewOpenDirection.values
                 //     .elementAt(Random().nextInt(2)),
-                // displayStringForOption:
-                //     //RawAutocomplete.defaultStringForOption,
-                //     (option) {
-                //   return 'Match ${options.indexOf(option) + 1}: $option';
-                // },
+                displayStringForOption:
+                    //RawAutocomplete.defaultStringForOption,
+                    (option) {
+                  return option.name;
+                },
                 onSelected: (option) {
                   setState(() {
                     selectedItem =
-                        'Item number ${autocompleteOptions.indexOf(option) + 1}:\n$option';
+                        'Item number ${AutocompleteModel.mockList.indexOf(option) + 1}:\n${option.name}\nItem id: ${option.id}\nItem description: ${option.description}';
                   });
                 },
                 optionsViewBuilder: (context, onSelected, options) {
@@ -81,7 +81,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                     itemBuilder: (context, index) {
                       return ElevatedButton(
                           onPressed: () => onSelected(items[index]),
-                          child: Text(items[index]));
+                          child: Text(items[index].name));
                     },
                   );
                 },
@@ -106,4 +106,83 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
       ),
     );
   }
+}
+
+class AutocompleteModel {
+  final String name;
+  final String description;
+  final String id;
+
+  AutocompleteModel({
+    required this.name,
+    required this.description,
+    required this.id,
+  });
+
+  static List<AutocompleteModel> mockList = [
+    AutocompleteModel(
+      name: 'test',
+      description: 'Desription for test: Ad duis occaecat deserunt in.',
+      id: '1111',
+    ),
+    AutocompleteModel(
+      name: 'test 2',
+      description:
+          'Desription for test 2: Lorem exercitation incididunt qui voluptate ipsum laboris adipisicing qui irure id.',
+      id: '2222',
+    ),
+    AutocompleteModel(
+      name: 'auto test',
+      description:
+          'Eiusmod id voluptate eiusmod aliqua pariatur tempor veniam pariatur aute minim amet eiusmod sunt aliquip.',
+      id: '3333',
+    ),
+    AutocompleteModel(
+      name: 'Temporary',
+      description:
+          'Tempor Lorem velit elit ex occaecat nostrud ad non incididunt pariatur.',
+      id: '4444',
+    ),
+    AutocompleteModel(
+      name: 'Exception m2',
+      description: 'Excepteur enim qui consequat deserunt non sint consequat.',
+      id: '5555',
+    ),
+    AutocompleteModel(
+      name: 'Ilyada',
+      description:
+          'Eu in aliqua sit consequat esse do consectetur aliquip et velit nisi.',
+      id: '6666',
+    ),
+    AutocompleteModel(
+      name: 'Uncle BOB',
+      description:
+          'Ullamco in Lorem laboris ut nostrud aliquip aliqua velit aliqua et anim cillum mollit do.',
+      id: '1111',
+    ),
+    AutocompleteModel(
+      name: 'Commodore 64',
+      description:
+          'Commodo occaecat et nulla aliquip consequat irure aliqua ullamco.',
+      id: '7777',
+    ),
+    AutocompleteModel(
+      name: 'Dolar',
+      description:
+          'Dolor ipsum eiusmod cillum aliquip nulla laborum culpa do adipisicing est in.',
+      id: '8888',
+    ),
+    AutocompleteModel(
+      name: 'Maximum',
+      description:
+          'Pariatur eiusmod labore consectetur elit esse anim qui tempor velit laborum irure consequat.',
+      id: '9999',
+    ),
+    AutocompleteModel(
+      name: 'Minimum',
+      description:
+          'Minim veniam enim cupidatat eiusmod eiusmod veniam ut ullamco aute adipisicing proident laboris.',
+      id: '1010',
+    ),
+  ];
 }
