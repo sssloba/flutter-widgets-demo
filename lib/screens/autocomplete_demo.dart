@@ -31,6 +31,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   style: TextStyle(color: Colors.red, fontSize: 18.0),
                 ),
               ),
+              const SizedBox(height: 8.0),
               Autocomplete<AutocompleteModel>(
                 optionsBuilder: (textEditingValue) {
                   if (textEditingValue.text.trim().isEmpty) {
@@ -58,6 +59,34 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   setState(() {
                     selectedItem = option;
                   });
+                },
+                fieldViewBuilder: (context, textEditingController, focusNode,
+                    onFieldSubmitted) {
+                  return TextField(
+                    controller: textEditingController,
+                    focusNode: focusNode,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 2.0,
+                          color: Colors.deepPurple,
+                          strokeAlign: 55.0,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                      ),
+                      suffixIcon: CloseButton(
+                        onPressed: () {
+                          textEditingController.clear();
+                          setState(() {
+                            selectedItem = null;
+                          });
+                        },
+                      ),
+                    ),
+                  );
                 },
                 optionsViewBuilder: (context, onSelected, options) {
                   final items = options.toList();
@@ -95,7 +124,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   );
                 },
               ),
-              const SizedBox(height: 30.0),
+              const SizedBox(height: 16.0),
               Text(selectedItem == null
                   ? 'Nothing selected'
                   : 'Selected item is:'),
