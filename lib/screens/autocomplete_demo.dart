@@ -9,7 +9,7 @@ class AutocompleteDemo extends StatefulWidget {
 }
 
 class _AutocompleteDemoState extends State<AutocompleteDemo> {
-  String? selectedItem;
+  AutocompleteModel? selectedItem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +56,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                 },
                 onSelected: (option) {
                   setState(() {
-                    selectedItem =
-                        'Item number ${AutocompleteModel.mockList.indexOf(option) + 1}:\n${option.name}\nItem id: ${option.id}\nItem description: ${option.description}';
+                    selectedItem = option;
                   });
                 },
                 optionsViewBuilder: (context, onSelected, options) {
@@ -100,16 +99,44 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
               Text(selectedItem == null
                   ? 'Nothing selected'
                   : 'Selected item is:'),
-              if (selectedItem != null)
+              if (selectedItem != null) ...[
+                const SizedBox(height: 8.0),
                 Text(
-                  selectedItem!,
+                  'Item number ${AutocompleteModel.mockList.indexOf(selectedItem!) + 1}:',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.teal,
+                  ),
+                ),
+                Text(
+                  selectedItem!.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24.0,
+                    fontSize: 32.0,
                     color: Colors.lightBlueAccent,
                   ),
                 ),
+                Text(
+                  'Item id: ${selectedItem!.id}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    color: Colors.greenAccent,
+                  ),
+                ),
+                Text(
+                  'Description: ${selectedItem!.description}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                  ),
+                ),
+              ]
             ],
           ),
         ),
@@ -168,25 +195,25 @@ class AutocompleteModel {
       name: 'Uncle BOB',
       description:
           'Ullamco in Lorem laboris ut nostrud aliquip aliqua velit aliqua et anim cillum mollit do.',
-      id: '1111',
+      id: '7777',
     ),
     AutocompleteModel(
       name: 'Commodore 64',
       description:
           'Commodo occaecat et nulla aliquip consequat irure aliqua ullamco.',
-      id: '7777',
+      id: '8888',
     ),
     AutocompleteModel(
       name: 'Dolar',
       description:
           'Dolor ipsum eiusmod cillum aliquip nulla laborum culpa do adipisicing est in.',
-      id: '8888',
+      id: '9999',
     ),
     AutocompleteModel(
       name: 'Maximum',
       description:
           'Pariatur eiusmod labore consectetur elit esse anim qui tempor velit laborum irure consequat.',
-      id: '9999',
+      id: '9191',
     ),
     AutocompleteModel(
       name: 'Minimum',
