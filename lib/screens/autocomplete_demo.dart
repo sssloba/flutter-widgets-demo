@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
 
 class AutocompleteDemo extends StatefulWidget {
@@ -90,37 +91,42 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                 },
                 optionsViewBuilder: (context, onSelected, options) {
                   final items = options.toList();
-                  return ListView.builder(
-                    itemCount: items.length,
-                    padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 200.0),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: ElevatedButton(
-                          onPressed: () => onSelected(items[index]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    items[index].name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24.0,
-                                        color: Colors.greenAccent),
-                                  ),
-                                  Text('Item id: ${items[index].id}'),
-                                  Text(
-                                    'Description: ${items[index].description}',
-                                  )
-                                ]),
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onPanDown: (_) =>
+                        SystemChannels.textInput.invokeMethod('TextInput.hide'),
+                    child: ListView.builder(
+                      itemCount: items.length,
+                      padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 200.0),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: ElevatedButton(
+                            onPressed: () => onSelected(items[index]),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      items[index].name,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24.0,
+                                          color: Colors.greenAccent),
+                                    ),
+                                    Text('Item id: ${items[index].id}'),
+                                    Text(
+                                      'Description: ${items[index].description}',
+                                    )
+                                  ]),
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   );
                 },
               ),
