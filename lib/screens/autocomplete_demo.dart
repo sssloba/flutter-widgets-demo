@@ -92,7 +92,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   final items = options.toList();
                   return ListView.builder(
                     itemCount: items.length,
-                    padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 48.0),
+                    padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 200.0),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -249,6 +249,12 @@ class AutocompleteModel {
       description:
           'Minim veniam enim cupidatat eiusmod eiusmod veniam ut ullamco aute adipisicing proident laboris.',
       id: '1010',
+    ),
+    AutocompleteModel(
+      name: 'Extended',
+      description:
+          'Aliquip enim eiusmod nulla pariatur mollit voluptate mollit adipisicing anim adipisicing.',
+      id: '1212',
     ),
   ];
 }
