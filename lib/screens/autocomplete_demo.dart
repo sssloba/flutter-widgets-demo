@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
 
+enum FilterBy {
+  all,
+  name,
+  description,
+  id,
+}
+
 class AutocompleteDemo extends StatefulWidget {
   const AutocompleteDemo({super.key});
 
@@ -11,6 +18,8 @@ class AutocompleteDemo extends StatefulWidget {
 
 class _AutocompleteDemoState extends State<AutocompleteDemo> {
   AutocompleteModel? selectedItem;
+  FilterBy filterBy = FilterBy.all;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +34,27 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
         child: Center(
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Filter By: '),
+                  DropdownButton<FilterBy>(
+                    hint: Text(filterBy.name),
+                    alignment: AlignmentDirectional.center,
+                    value: filterBy,
+                    items: FilterBy.values
+                        .map((e) => DropdownMenuItem<FilterBy>(
+                              value: e,
+                              child: Text(e.name),
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      filterBy = value!;
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -41,6 +71,11 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   if (textEditingValue.text.trim() == '@all') {
                     return AutocompleteModel.mockList;
                   }
+                  List<AutocompleteModel> allMatches = [];
+                  List<AutocompleteModel> findByName = [];
+                  List<AutocompleteModel> findByDescription = [];
+                  List<AutocompleteModel> findById = [];
+
                   return AutocompleteModel.mockList
                       .where((e) => e.name
                           .toLowerCase()
@@ -97,7 +132,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                         SystemChannels.textInput.invokeMethod('TextInput.hide'),
                     child: ListView.builder(
                       itemCount: items.length,
-                      padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 200.0),
+                      padding: const EdgeInsets.fromLTRB(0.0, 8.0, 48.0, 250.0),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Padding(
