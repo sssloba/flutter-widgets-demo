@@ -50,6 +50,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                         .toList(),
                     onChanged: (value) {
                       filterBy = value!;
+                      FocusScope.of(context).nextFocus();
                       setState(() {});
                     },
                   ),
@@ -64,24 +65,9 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
               ),
               const SizedBox(height: 8.0),
               Autocomplete<AutocompleteModel>(
-                optionsBuilder: (textEditingValue) {
-                  if (textEditingValue.text.trim().isEmpty) {
-                    return const Iterable.empty();
-                  }
-                  if (textEditingValue.text.trim() == '@all') {
-                    return AutocompleteModel.mockList;
-                  }
-                  List<AutocompleteModel> allMatches = [];
-                  List<AutocompleteModel> findByName = [];
-                  List<AutocompleteModel> findByDescription = [];
-                  List<AutocompleteModel> findById = [];
-
-                  return AutocompleteModel.mockList
-                      .where((e) => e.name
-                          .toLowerCase()
-                          .contains(textEditingValue.text.toLowerCase()))
-                      .toList();
-                },
+                optionsBuilder: (textEditingValue) =>
+                    AutocompleteModel.filterResults(
+                        text: textEditingValue.text, filter: filterBy),
                 optionsMaxHeight: 500,
                 // initialValue: const TextEditingValue(text: 'test'),
                 // optionsViewOpenDirection: OptionsViewOpenDirection.values
@@ -125,7 +111,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                   );
                 },
                 optionsViewBuilder: (context, onSelected, options) {
-                  final items = options.toList();
+                  List<AutocompleteModel> items = options.toList();
                   return GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onPanDown: (_) =>
@@ -225,6 +211,38 @@ class AutocompleteModel {
     required this.description,
     required this.id,
   });
+
+  static List<AutocompleteModel> filterResults(
+      {required String text, required FilterBy filter}) {
+    if (text.trim().isEmpty) {
+      return const [];
+    }
+    if (text.trim() == '@all') {
+      return AutocompleteModel.mockList;
+    }
+    switch (filter) {
+      case FilterBy.all:
+        return AutocompleteModel.mockList
+            .where((e) =>
+                e.name.toLowerCase().contains(text.toLowerCase()) ||
+                e.description.toLowerCase().contains(text.toLowerCase()) ||
+                e.id.toLowerCase().contains(text.toLowerCase()))
+            .toList();
+      case FilterBy.name:
+        return AutocompleteModel.mockList
+            .where((e) => e.name.toLowerCase().contains(text.toLowerCase()))
+            .toList();
+      case FilterBy.description:
+        return AutocompleteModel.mockList
+            .where(
+                (e) => e.description.toLowerCase().contains(text.toLowerCase()))
+            .toList();
+      case FilterBy.id:
+        return AutocompleteModel.mockList
+            .where((e) => e.id.toLowerCase().contains(text.toLowerCase()))
+            .toList();
+    }
+  }
 
   static List<AutocompleteModel> mockList = [
     AutocompleteModel(
