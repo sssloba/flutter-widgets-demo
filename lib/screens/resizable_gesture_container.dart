@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
 
 class ResizableGestureContainer extends StatefulWidget {
   const ResizableGestureContainer({Key? key}) : super(key: key);
@@ -16,78 +17,86 @@ class _ResizableGestureContainerState extends State<ResizableGestureContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: LayoutBuilder(
-        builder: (context, constraints) => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              transform: Matrix4.translationValues(transformX, 0, 0),
-              height: 60,
-              width: constraints.maxWidth,
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 0,
-                    bottom: 0,
-                    left: leftPos,
-                    right: rightPos,
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          onHorizontalDragUpdate: (details) {
-                            leftPos = details.globalPosition.dx;
-                            setState(() {});
-                            debugPrint(leftPos.toString());
-                          },
-                          child: Container(
-                            height: 60,
-                            color: Colors.purple,
-                            child: const Icon(
-                              Icons.navigate_next_rounded,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
+    return Scaffold(
+      drawer: const AppDrawer(),
+      appBar: AppBar(
+        title: const Text(
+          'Resizable Gesture Container',
+        ),
+      ),
+      body: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                transform: Matrix4.translationValues(transformX, 0, 0),
+                height: 60,
+                width: constraints.maxWidth,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      left: leftPos,
+                      right: rightPos,
+                      child: Row(
+                        children: [
+                          GestureDetector(
                             onTap: () {},
                             onHorizontalDragUpdate: (details) {
-                              final midPos = details.delta;
-                              transformX += midPos.dx;
+                              leftPos = details.globalPosition.dx;
                               setState(() {});
-                              debugPrint(midPos.toString());
+                              debugPrint(leftPos.toString());
                             },
                             child: Container(
+                              height: 60,
                               color: Colors.purple,
+                              child: const Icon(
+                                Icons.navigate_next_rounded,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          onHorizontalDragUpdate: (details) {
-                            rightPos = constraints.maxWidth -
-                                details.globalPosition.dx;
-                            setState(() {});
-                            debugPrint(rightPos.toString());
-                          },
-                          child: Container(
-                            height: 60,
-                            color: Colors.purple,
-                            child: const Icon(
-                              Icons.navigate_before_rounded,
-                              color: Colors.black,
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {},
+                              onHorizontalDragUpdate: (details) {
+                                final midPos = details.delta;
+                                transformX += midPos.dx;
+                                setState(() {});
+                                debugPrint(midPos.toString());
+                              },
+                              child: Container(
+                                color: Colors.purple,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
+                          GestureDetector(
+                            onTap: () {},
+                            onHorizontalDragUpdate: (details) {
+                              rightPos = constraints.maxWidth -
+                                  details.globalPosition.dx;
+                              setState(() {});
+                              debugPrint(rightPos.toString());
+                            },
+                            child: Container(
+                              height: 60,
+                              color: Colors.purple,
+                              child: const Icon(
+                                Icons.navigate_before_rounded,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
