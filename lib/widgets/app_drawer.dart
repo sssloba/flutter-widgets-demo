@@ -32,6 +32,7 @@ class AppDrawer extends StatelessWidget {
               'Resizable Gesture Container', ResizableGestureContainer()),
           DrawerTile('Autocomplete Demo', AutocompleteDemo()),
           DrawerTile('Badge Demo', BadgeDemo()),
+          DrawerTile('OTP Demo', OtpDemo()),
         ],
       ),
     );

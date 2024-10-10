@@ -13,6 +13,7 @@ export 'package:flutter_widgets_demo/screens/paginated_infinite_list_view.dart';
 export 'package:flutter_widgets_demo/screens/physical_model_demo.dart';
 export 'package:flutter_widgets_demo/screens/draggables.dart';
 export 'package:flutter_widgets_demo/screens/home_page.dart';
+export 'package:flutter_widgets_demo/screens/otp_demo.dart';
 export 'package:flutter_widgets_demo/screens/reorderables.dart';
 export 'package:flutter_widgets_demo/screens/resizable_gesture_container.dart';
 export 'package:flutter_widgets_demo/screens/slivers.dart';
