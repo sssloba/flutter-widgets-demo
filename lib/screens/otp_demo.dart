@@ -12,118 +12,58 @@ class OtpDemo extends StatelessWidget {
         title: const Text('OTP Demo'),
       ),
       drawer: const AppDrawer(),
-      body: Form(
-          child: Center(
+      resizeToAvoidBottomInset: false,
+      body: const Form(
+          child: Padding(
+        padding: EdgeInsets.only(top: 80.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 68,
-              width: 64,
-              child: TextFormField(
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    FocusScope.of(context).nextFocus();
-                  }
-                },
-                onSaved: (pin1) {},
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    ),
-                  ),
-                ),
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(1),
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 68,
-              width: 64,
-              child: TextFormField(
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    FocusScope.of(context).nextFocus();
-                  }
-                },
-                onSaved: (pin2) {},
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    ),
-                  ),
-                ),
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(1),
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 68,
-              width: 64,
-              child: TextFormField(
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    FocusScope.of(context).nextFocus();
-                  }
-                },
-                onSaved: (pin3) {},
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    ),
-                  ),
-                ),
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(1),
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 68,
-              width: 64,
-              child: TextFormField(
-                onChanged: (value) {
-                  if (value.length == 1) {
-                    FocusScope.of(context).nextFocus();
-                  }
-                },
-                onSaved: (pin4) {},
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    ),
-                  ),
-                ),
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(1),
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
+            OtpField(),
+            OtpField(),
+            OtpField(),
+            OtpField(),
           ],
         ),
       )),
+    );
+  }
+}
+
+class OtpField extends StatelessWidget {
+  const OtpField({super.key, this.onSaved});
+
+  final Function(String? pin)? onSaved;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 68,
+      width: 64,
+      child: TextFormField(
+        autofocus: true,
+        onChanged: (value) {
+          if (value.length == 1) {
+            FocusScope.of(context).nextFocus();
+          }
+        },
+        onSaved: onSaved,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15.0),
+            ),
+          ),
+        ),
+        style: Theme.of(context).textTheme.headlineLarge,
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(1),
+          FilteringTextInputFormatter.digitsOnly,
+        ],
+      ),
     );
   }
 }
