@@ -31,10 +31,22 @@ class OtpDemo extends StatelessWidget {
   }
 }
 
-class OtpField extends StatelessWidget {
+class OtpField extends StatefulWidget {
   const OtpField({super.key, this.onSaved});
 
   final Function(String? pin)? onSaved;
+
+  @override
+  State<OtpField> createState() => _OtpFieldState();
+}
+
+class _OtpFieldState extends State<OtpField> {
+  final TextEditingController controller = TextEditingController();
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +54,16 @@ class OtpField extends StatelessWidget {
       height: 68,
       width: 64,
       child: TextFormField(
+        controller: controller,
         autofocus: true,
         onChanged: (value) {
-          if (value.length == 1) {
+          if (value.isNotEmpty) {
+            controller.text = value.substring(value.length - 1);
+
             FocusScope.of(context).nextFocus();
           }
         },
-        onSaved: onSaved,
+        onSaved: widget.onSaved,
         decoration: const InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
@@ -60,7 +75,7 @@ class OtpField extends StatelessWidget {
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(1),
+          //LengthLimitingTextInputFormatter(1),
           FilteringTextInputFormatter.digitsOnly,
         ],
       ),
