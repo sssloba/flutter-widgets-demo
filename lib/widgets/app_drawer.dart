@@ -33,6 +33,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Autocomplete Demo', AutocompleteDemo()),
           DrawerTile('Badge Demo', BadgeDemo()),
           DrawerTile('OTP Demo', OtpDemo()),
+          DrawerTile('About Licences', ShowLicencesDemo()),
         ],
       ),
     );
