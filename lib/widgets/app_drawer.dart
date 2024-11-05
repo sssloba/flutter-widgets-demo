@@ -34,6 +34,7 @@ class AppDrawer extends StatelessWidget {
           DrawerTile('Badge Demo', BadgeDemo()),
           DrawerTile('OTP Demo', OtpDemo()),
           DrawerTile('About Licences', ShowLicencesDemo()),
+          DrawerTile('List Wheel Demo', ListWheelDemo()),
         ],
       ),
     );
