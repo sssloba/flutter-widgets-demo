@@ -9,6 +9,7 @@ class ListWheelDemo extends StatefulWidget {
 }
 
 class _ListWheelDemoState extends State<ListWheelDemo> {
+  int selectedItem = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,49 +17,65 @@ class _ListWheelDemoState extends State<ListWheelDemo> {
       appBar: AppBar(
         title: const Text('List Wheel Demo'),
       ),
-      body: Center(
-        child: ListWheelScrollView(
-          itemExtent: 200,
-          diameterRatio: 2.0,
-          perspective: 0.005,
-          useMagnifier: true,
-          magnification: 1.2,
-          offAxisFraction: -0.5,
-          children: [
-            Container(
-              width: 200,
-              color: Colors.red,
+      body: Stack(
+        children: [
+          Center(
+            child: ListWheelScrollView(
+              itemExtent: 200,
+              diameterRatio: 2.0,
+              perspective: 0.005,
+              useMagnifier: true,
+              magnification: 1.2,
+              offAxisFraction: -0.5,
+              overAndUnderCenterOpacity: 0.5,
+              squeeze: 2,
+              onSelectedItemChanged: (value) => setState(() {
+                selectedItem = value;
+              }),
+              children: [
+                Container(
+                  width: 200,
+                  color: Colors.red,
+                ),
+                Container(
+                  width: 70,
+                  color: Colors.blue,
+                ),
+                Container(
+                  width: 220,
+                  color: Colors.green,
+                ),
+                Container(
+                  width: 150,
+                  color: Colors.yellow,
+                ),
+                Container(
+                  width: 20,
+                  color: Colors.red,
+                ),
+                Container(
+                  width: 130,
+                  color: Colors.blue,
+                ),
+                Container(
+                  width: 50,
+                  color: Colors.green,
+                ),
+                Container(
+                  width: 300,
+                  color: Colors.yellow,
+                ),
+              ],
             ),
-            Container(
-              width: 70,
-              color: Colors.blue,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              'Selected Item: $selectedItem',
+              style: const TextStyle(fontSize: 28.0),
             ),
-            Container(
-              width: 200,
-              color: Colors.green,
-            ),
-            Container(
-              width: 300,
-              color: Colors.yellow,
-            ),
-            Container(
-              width: 200,
-              color: Colors.red,
-            ),
-            Container(
-              width: 100,
-              color: Colors.blue,
-            ),
-            Container(
-              width: 50,
-              color: Colors.green,
-            ),
-            Container(
-              width: 300,
-              color: Colors.yellow,
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
