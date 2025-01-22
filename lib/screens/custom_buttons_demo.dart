@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
+import 'package:flutter_widgets_demo/widgets/dual_state_button.dart';
 import 'package:flutter_widgets_demo/widgets/expanded_button.dart';
 
 class CustomButtonsDemo extends StatelessWidget {
@@ -24,6 +25,8 @@ class CustomButtonsDemo extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: 20),
+        DualStateButton(title: 'Dual State Button - Click Me', onConfirm: () {})
       ]),
     );
   }
