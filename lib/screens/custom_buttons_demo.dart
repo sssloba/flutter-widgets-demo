@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets_demo/widgets/app_drawer.dart';
-import 'package:flutter_widgets_demo/widgets/dual_state_button.dart';
-import 'package:flutter_widgets_demo/widgets/expanded_button.dart';
+import 'package:flutter_widgets_demo/widgets/buttons/dual_state_button.dart';
+import 'package:flutter_widgets_demo/widgets/buttons/expanded_button.dart';
+import 'package:flutter_widgets_demo/widgets/buttons/segmented_button_demo.dart';
 
 class CustomButtonsDemo extends StatelessWidget {
   const CustomButtonsDemo({super.key});
@@ -26,7 +27,9 @@ class CustomButtonsDemo extends StatelessWidget {
           ],
         ),
         SizedBox(height: 20),
-        DualStateButton(title: 'Dual State Button - Click Me', onConfirm: () {})
+        DualStateButton(title: 'Dual State Button - Click Me', onConfirm: () {}),
+        SizedBox(height: 20),
+        SegmentedButtonDemo()
       ]),
     );
   }
