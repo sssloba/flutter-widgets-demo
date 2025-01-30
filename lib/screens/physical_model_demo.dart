@@ -15,11 +15,11 @@ class PhysicalModelDemo extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           // shape: BoxShape.circle,
           elevation: 23,
-          color: Colors.green.withOpacity(0.3),
+          color: Colors.green.withValues(alpha: 0.3),
           shadowColor: Colors.red,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.deepPurpleAccent.withOpacity(0.2),
+              color: Colors.deepPurpleAccent.withValues(alpha: 0.2),
               shape: BoxShape.circle,
               // borderRadius: BorderRadius.circular(15),
             ),

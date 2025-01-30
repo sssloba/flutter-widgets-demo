@@ -90,7 +90,7 @@ class _DualButtonSection extends StatelessWidget {
             onPressed: firstButtonOnPressed,
           ),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         Expanded(
           child: _DualButtonItem(
             text: secondButtonText,

@@ -16,12 +16,12 @@ class _SegmentedButtonDemoState extends State<SegmentedButtonDemo> {
       multiSelectionEnabled: true,
       emptySelectionAllowed: true,
       showSelectedIcon: false,
-      style: ButtonStyle().copyWith(
+      style: const ButtonStyle().copyWith(
         backgroundColor: _resolveButtonColors(Colors.greenAccent, Colors.grey),
         foregroundColor: _resolveButtonColors(Colors.yellow, Colors.brown),
         iconColor: _resolveButtonColors(Colors.purpleAccent, Colors.yellow),
       ),
-      segments: [
+      segments: const [
         ButtonSegment(
           value: 1,
           label: Text('First option'),

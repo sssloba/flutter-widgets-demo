@@ -26,10 +26,10 @@ class CustomButtonsDemo extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         DualStateButton(title: 'Dual State Button - Click Me', onConfirm: () {}),
-        SizedBox(height: 20),
-        SegmentedButtonDemo()
+        const SizedBox(height: 20),
+        const SegmentedButtonDemo()
       ]),
     );
   }
